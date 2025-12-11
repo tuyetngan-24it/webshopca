@@ -1,0 +1,579 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#video-background {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  object-fit: cover;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1px;
+  transition: background-color 0.5s ease;
+}
+
+.container {
+  background-color: rgba(97, 78, 78, 0.13);
+  backdrop-filter: blur(10px);
+  border-radius: 40px;
+  box-shadow: 0 0 50px rgb(126, 118, 118);
+  position: relative;
+  width: 1000px;
+  max-width: 100%;
+  min-height: 600px;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+  margin: 0 auto;
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.6s ease-in-out;
+}
+
+.sign-in {
+  left: 0;
+  z-index: 2;
+}
+
+.sign-up {
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+}
+
+.container.active .sign-in {
+  transform: translateX(100%);
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
+}
+
+@keyframes show {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  text-transform: capitalize;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-out;
+  margin-top: 40px;
+  text-align: center;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  color: #e5e5e5;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.social-icons {
+  margin-top: 10px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.social-icons a.icon {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icons a.icon:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+span {
+  display: block;
+  margin: 20px 0;
+  font-size: 14px;
+  color: #e5e5e5;
+  animation: fadeIn 2s ease-out;
+  text-align: center;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 15px;
+  margin: 12px 0;
+  border-radius: 12px;
+  width: 100%;
+  outline: none;
+  font-family: "Quicksand", sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+input::placeholder {
+  color: #e0e0e0;
+  opacity: 1;
+}
+
+input:focus {
+  border: 1px solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+input:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+button {
+  background-color: #401994;
+  color: #fff;
+  border: none;
+  padding: 14px 50px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #2b1c4a;
+  transform: scale(1.05);
+}
+
+button.hidden {
+  background-color: transparent;
+  border: 1px solid #fff;
+  margin-top: 30px;
+}
+
+a.forgot-password {
+  color: #e5e5e5;
+  font-size: 13px;
+  text-decoration: none;
+  margin: 10px 0;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+a.forgot-password:hover {
+  color: #ffffff;
+}
+
+.toggle-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(5px);
+}
+
+.toggle {
+  background: transparent;
+  height: 100%;
+  width: 200%;
+  position: relative;
+  left: -100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.toggle-panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  text-align: center;
+  color: white;
+}
+
+.toggle-left {
+  transform: translateX(0%);
+}
+
+.toggle-right {
+  right: 0;
+  transform: translateX(0%);
+}
+.container.active .toggle-container {
+  transform: translateX(-100%);
+}
+
+.container.active .toggle {
+  transform: translateX(50%);
+}
+
+.toggle-panel h1 {
+  color: #fff;
+  margin-bottom: 15px;
+  animation: fadeIn 1s ease-out;
+}
+
+.toggle-panel p {
+  color: #e5e5e5;
+  margin-bottom: 20px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Viền đỏ khi lỗi */
+.input-error {
+  border: 2px solid #ff4d4d !important;
+  outline: none;
+}
+
+/* Tooltip lỗi */
+.error-message {
+  color: #ff4d4d;
+  font-size: 13px;
+  margin-top: 3px;
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Hiệu ứng rung khi lỗi */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(4px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.shake {
+  animation: shake 0.3s;
+}
+
+/* Tooltip fade */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} /* =========================================
+   RESPONSIVE TABLET & MOBILE
+   Dán đoạn này vào cuối file CSS của bạn
+   ========================================= */
+
+/* Tablet (Màn hình máy tính bảng và laptop nhỏ) */
+@media (max-width: 991px) {
+  .container {
+    width: 95vw; /* Chiếm 95% chiều rộng màn hình */
+    max-width: 900px;
+    min-height: 550px; /* Giảm chiều cao một chút */
+  }
+
+  h1 {
+    font-size: 24px; /* Giảm cỡ chữ tiêu đề */
+  }
+}
+/* =========================================
+  /* Tablet (Màn hình máy tính bảng và laptop nhỏ) */
+        @media (max-width: 991px) {
+            .container {
+                width: 95vw; /* Chiếm 95% chiều rộng màn hình */
+                max-width: 900px;
+                min-height: 550px; /* Giảm chiều cao một chút */
+            }
+
+            h1 {
+                font-size: 24px; /* Giảm cỡ chữ tiêu đề */
+            }
+        }
+
+        /* =========================================
+           MOBILE RESPONSIVE (CLEAN VERSION)
+           Dán đè đoạn này vào cuối file CSS
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Cấu hình khung chung */
+            .container {
+                background-color: rgba(0, 0, 0, 0.6); /* Nền tối nhẹ để nổi chữ */
+                width: 100%;
+                min-height: 100vh; /* Full màn hình */
+                max-width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+            }
+
+            /* 2. Form Container - Chiếm toàn bộ không gian */
+            .form-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%; /* Full chiều cao */
+                padding: 20px;
+                background: transparent;
+                transition: all 0.6s ease-in-out;
+                z-index: 5; /* Nằm dưới toggle một chút */
+            }
+
+            /* Tinh chỉnh input trên mobile cho dễ bấm */
+            input {
+                padding: 15px;
+                margin: 10px 0;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-top: 50px; /* Cách top ra một chút */
+            }
+
+            /* 3. Xử lý logic ẨN/HIỆN Form (Không dùng trượt nữa, dùng ẩn hiện cho nhẹ) */
+
+            /* Mặc định: Form Đăng Nhập hiện */
+            .sign-in {
+                opacity: 1;
+                z-index: 2;
+                pointer-events: all;
+            }
+
+            /* Mặc định: Form Đăng Ký ẩn */
+            .sign-up {
+                opacity: 0;
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            /* KHI ACTIVE (Chế độ Đăng Ký) */
+            .container.active .sign-in {
+                transform: none; /* Bỏ hiệu ứng trượt ngang */
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .container.active .sign-up {
+                transform: none; /* Bỏ hiệu ứng trượt ngang */
+                opacity: 1;
+                pointer-events: all;
+                animation: fadeIn 0.5s;
+            }
+
+            /* 4. Xử lý "Cái hộp màu xám" (Toggle Container) 
+                 => Biến nó thành thanh công cụ trong suốt ở dưới đáy */
+            .toggle-container {
+                position: absolute;
+                bottom: 0; /* Gắn chặt xuống đáy */
+                top: auto; /* Bỏ thuộc tính top cũ */
+                left: 0;
+                width: 100%;
+                height: 80px; /* Chiều cao cố định nhỏ thôi */
+
+                /* QUAN TRỌNG: Làm trong suốt background để "bỏ" cái hộp xám */
+                background: transparent;
+                border-radius: 0;
+                overflow: visible;
+                z-index: 100;
+                /* Bỏ các hiệu ứng trượt của container */
+                transform: none !important;
+            }
+
+            .toggle {
+                background: transparent;
+                height: 100%;
+                width: 100%;
+                transform: none !important; /* Bỏ trượt */
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Panel chứa nút bấm */
+            .toggle-panel {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                top: 0;
+                transform: none !important; /* Bỏ trượt */
+                transition: opacity 0.3s;
+            }
+
+            /* Ẩn bớt chữ rườm rà, chỉ giữ lại nút */
+            .toggle-panel h1,
+            .toggle-panel p {
+                display: none;
+            }
+
+            /* Panel phải (Hiện ở trang Login -> Nút bấm qua Đăng ký) */
+            .toggle-right {
+                opacity: 1;
+                pointer-events: all;
+                z-index: 2;
+            }
+
+            /* Panel trái (Hiện ở trang Đăng ký -> Nút bấm về Đăng nhập) */
+            .toggle-left {
+                opacity: 0;
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            /* Logic đảo ngược nút bấm khi Active */
+            .container.active .toggle-right {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .container.active .toggle-left {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            /* 5. Trang trí lại cái NÚT chuyển đổi cho đẹp (thay vì nút to đùng) */
+            .toggle-panel button {
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                color: #fff;
+                font-size: 13px;
+                padding: 10px 20px;
+                margin: 0;
+                border-radius: 30px;
+                width: auto;
+                backdrop-filter: blur(5px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Thay đổi nội dung nút bằng CSS (Mẹo nhỏ) 
+               để người dùng hiểu nút này làm gì */
+            .toggle-right button::after {
+                content: " Chưa có tài khoản? Đăng ký ngay";
+                font-size: 12px;
+                display: block;
+                font-weight: normal;
+                text-transform: none;
+            }
+            
+            /* Tùy chỉnh thêm cho nút đăng nhập để đồng bộ */
+            .toggle-left button::after {
+                content: " Đã có tài khoản? Đăng nhập";
+                font-size: 12px;
+                display: block;
+                font-weight: normal;
+                text-transform: none;
+            }
+
+            /* Ẩn chữ gốc đi */
+            .toggle-panel button {
+                font-size: 0;
+            }
+            .toggle-panel button::after {
+                font-size: 13px;
+            }
+
+            #video-background {
+                display: block !important;
+            }
+        }

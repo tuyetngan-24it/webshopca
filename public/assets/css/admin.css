@@ -1,0 +1,642 @@
+/* :root để định nghĩa màu sắc đồng bộ */
+
+:root {
+  --bg-dark: #000000;
+  --bg-content: #1a1a1a;
+  --bg-card: #2c2c2c;
+  --text-light: #ffffff;
+  --text-muted: #cccccc;
+  --primary-blue: #0a6dc2;
+  --primary-blue-dark: #11467e;
+  --hover-blue: #6da7e5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--bg-content);
+  color: var(--text-light);
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 250px;
+  background: var(--bg-dark);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.sidebar-logo img {
+  width: 50px;
+  height: auto;
+}
+
+.sidebar-logo .text-container {
+  margin-left: 10px;
+}
+
+.sidebar-logo .text-main {
+  color: var(--text-light);
+  font-size: 18px;
+  font-weight: 700;
+  display: block;
+}
+
+.sidebar-logo .text-sub {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  flex: 1;
+}
+
+.sidebar-nav li a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 25px;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+.sidebar-nav li a:hover {
+  color: var(--hover-blue);
+}
+
+.sidebar-nav li a.active {
+  color: var(--text-light);
+  background-color: var(--primary-blue-dark);
+}
+
+.sidebar-nav li a.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background-color: var(--hover-blue);
+}
+
+.sidebar-nav li a i {
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid #333;
+}
+
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+.sidebar-footer a:hover {
+  color: #ff6b6b;
+}
+
+/* ===== Main Wrapper ===== */
+.main-wrapper {
+  flex: 1;
+  margin-left: 250px;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease;
+  width: calc(100% - 250px);
+  /* Fix width */
+}
+
+/* ===== Topbar ===== */
+.topbar {
+  background: var(--bg-card);
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu-toggle-admin {
+  display: none;
+  color: var(--text-light);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.search-bar {
+  position: relative;
+}
+
+.search-bar input {
+  background: var(--bg-content);
+  border: 1px solid #444;
+  border-radius: 20px;
+  padding: 8px 15px 8px 40px;
+  color: var(--text-light);
+  min-width: 300px;
+}
+
+.search-bar i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.admin-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.admin-user i {
+  font-size: 20px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.admin-user i:hover {
+  color: var(--hover-blue);
+}
+
+.admin-user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ===== Content Area ===== */
+.content-area {
+  padding: 30px;
+  flex: 1;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.content-header h1 {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+}
+
+/* Cards */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  padding: 25px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stat-card .icon-container {
+  font-size: 28px;
+  padding: 15px;
+  border-radius: 50%;
+  color: var(--text-light);
+}
+
+.stat-card .icon-container.blue {
+  background: var(--primary-blue-dark);
+}
+
+.stat-card .icon-container.green {
+  background: #1a6a3e;
+}
+
+.stat-card .icon-container.orange {
+  background: #b85c09;
+}
+
+.stat-card .icon-container.red {
+  background: #a12323;
+}
+
+.stat-card .stat-info h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+
+.stat-card .stat-info span {
+  font-size: clamp(24px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+/* Table */
+.data-table-container {
+  background: var(--bg-card);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.data-table-container h2 {
+  padding: 20px 25px;
+  border-bottom: 1px solid #444;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table thead {
+  background: var(--primary-blue-dark);
+}
+
+table th {
+  padding: 15px 25px;
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #444;
+  transition: background-color 0.3s ease;
+}
+
+table tbody tr:last-child {
+  border-bottom: none;
+}
+
+table tbody tr:hover {
+  background-color: #3a3a3a;
+}
+
+table td {
+  padding: 15px 25px;
+}
+
+table .status {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+table .status.pending {
+  background: #b85c09;
+  color: #fff;
+}
+
+table .status.completed {
+  background: #1a6a3e;
+  color: #fff;
+}
+
+table .status.cancelled {
+  background: #a12323;
+  color: #fff;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary-blue);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #09427c;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .main-wrapper {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .menu-toggle-admin {
+    display: block;
+  }
+
+  .search-bar {
+    display: none;
+  }
+
+  .content-area {
+    padding: 15px;
+  }
+
+  .content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+}
+
+/* =========================================
+   MODAL STYLES (FORM THÊM MỚI POPUP)
+   ========================================= */
+
+/* 1. Lớp phủ mờ toàn màn hình (Overlay) */
+.modal-overlay {
+  display: none; /* QUAN TRỌNG: Mặc định phải ẩn đi */
+  position: fixed; /* Để nó nổi lên trên cùng, không bị cuộn theo trang */
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Màu đen mờ 70% */
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px); /* Làm mờ nền đằng sau cho đẹp */
+}
+
+/* 2. Cái hộp chứa Form (Content) */
+.modal-content {
+  background-color: #1e1e1e; /* Nền card màu tối */
+  width: 500px; /* Chiều rộng form */
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Bóng đổ sâu */
+  border: 1px solid #333;
+  animation: slideIn 0.3s ease; /* Hiệu ứng trượt xuống */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hiệu ứng trượt xuống khi hiện */
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 3. Header của Modal */
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Nút đóng (X) */
+.close-btn {
+  font-size: 28px;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.3s;
+}
+.close-btn:hover {
+  color: #ff4d4d;
+}
+
+/* 4. Body chứa input */
+.modal-body {
+  padding: 20px;
+  overflow-y: auto; /* Nếu dài quá thì cuộn */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #ccc;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Style cho Input và Textarea (Dark Mode) */
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  background-color: #121212; /* Nền input đen */
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: #fff; /* Chữ trắng */
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #0a6dc2; /* Viền xanh khi bấm vào */
+  outline: none;
+}
+
+/* Input file chọn ảnh */
+input[type="file"] {
+  padding: 10px;
+  background: #2a2a2a;
+  cursor: pointer;
+}
+
+/* Chia 2 cột (Giá & Kho) */
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+.form-row .form-group {
+  flex: 1;
+}
+
+/* 5. Footer chứa nút bấm */
+.modal-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: flex-end; /* Đẩy nút sang phải */
+  gap: 10px;
+  background-color: #1a1a1a;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Style nút Hủy */
+.btn-secondary {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+.btn-secondary:hover {
+  background-color: #666;
+}
+
+/* Nút Lưu Lại dùng class .btn-primary có sẵn ở trên rồi */
+
+/* Mặc định trên Desktop thì Sidebar hiện bình thường */
+.sidebar {
+  width: 260px;
+  transition: all 0.3s ease; /* Hiệu ứng trượt mượt mà */
+  /* Các thuộc tính cũ giữ nguyên */
+}
+
+/* Nút toggle mặc định ẩn trên Desktop */
+.mobile-toggle {
+  display: none;
+  padding: 10px;
+  background: #020202; /* Hoặc màu nền header */
+  border-bottom: 1px solid #eee;
+}
+
+.btn-toggle {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* --- PHẦN QUAN TRỌNG CHO MOBILE (Màn hình < 768px) --- */
+@media (max-width: 768px) {
+  /* Hiện nút toggle */
+  .mobile-toggle {
+    display: block;
+  }
+
+  /* Sidebar ẩn sang bên trái */
+  .sidebar {
+    position: fixed; /* Để nó nổi lên trên nội dung */
+    top: 0;
+    left: -260px; /* Đẩy hết chiều rộng sidebar sang trái để ẩn */
+    height: 100vh;
+    z-index: 1000; /* Đảm bảo nó nằm trên các thành phần khác */
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Khi có thêm class 'active' thì hiện ra */
+  .sidebar.active {
+    left: 0;
+  }
+
+  /* (Tùy chọn) Làm mờ nền khi mở menu */
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  .overlay.active {
+    display: block;
+  }
+}

@@ -1,0 +1,50 @@
+Đồ án cơ sở 2
+
+
+routing -> controller -> model -> view (MVC);  
+
+routing : cơ chế định tuyến
+--->       định tuyến đường (tìm đường đến các trang con trong trang web); 
+
+
+
+Định tuyến theo kiểu trang html hoặc là định tuyến bình thường
+
+
+Tất cả những file viết trong dacs2 đều theo hướng đối tượng
+- kế thừa 
+- trừu tượng
+- đóng gói 
+- đa hình
+// 2 tính ---> kế thừa, tính đóng gói
+
+
+ 
+Model -> lớp để thao tác với dữ liệu từ csdl (database);
+và trả về dữ liệu từ cơ sở dữ liệu
+
+
+
+
+
+
+$data[name] = ""; 
+$data[content] = "view/home";
+$data[age] = 20
+
+$data['sub_content']['blogs'] = 123; 
+
+
+extract() lần 1 -> $sub_content['blogs'] 1 chiều;
+extract() lần 1 -> $blogs 1 chiều;
+extract(array); --> biến những cái key trong mảng sử dụng như 1 biến; 
+echo $name; 
+
+-------result; 
+echo $content;
+echo $age; 
+echo $data[name]; 
+
+
+
+

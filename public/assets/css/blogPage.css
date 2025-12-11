@@ -1,0 +1,992 @@
+/* =========================================
+   1. CẤU HÌNH CHUNG & BIẾN (VARIABLES)
+   ========================================= */
+/* Import Font Montserrat */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+  /* --- Màu Sắc Dark Mode --- */
+  --bg-body: #141620; /* Nền xanh đen đậm */
+  --bg-card: #1f2233; /* Nền card */
+  --bg-sidebar: #1f2233; /* Nền sidebar */
+  --bg-input: #2a2d45; /* Nền ô tìm kiếm */
+
+  /* --- Màu Chủ Đạo (Gradient) --- */
+  --primary: #0a6dc2;
+  --primary-gradient: linear-gradient(135deg, #0a6dc2 0%, #00c6ff 100%);
+  --secondary-gradient: linear-gradient(135deg, #ff5e00 0%, #ff9900 100%);
+  --primary-glow: rgba(10, 109, 194, 0.4);
+
+  /* --- Text --- */
+  --text-white: #ffffff;
+  --text-gray: #b0b0b0;
+
+  /* --- Bo Viền (Border Radius) --- */
+  --radius-lg: 24px; /* Bo góc lớn (Ảnh slider) */
+  --radius-md: 12px; /* Bo góc vừa (Card bài viết) */
+  --radius-pill: 50px; /* Bo tròn viên thuốc (Nút bấm) */
+
+  /* --- Cấu hình khác --- */
+  --border-color: #353950;
+  --font-main: "Montserrat", sans-serif;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: var(--bg-body);
+  color: var(--text-white);
+  font-family: var(--font-main);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.3s;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Wrapper nền Gradient */
+.blog-page-wrapper {
+  padding-top: 100px;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 0%, #1a253a 0%, #0b0d14 70%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+/* Khung widget bên phải */
+.sidebar-widget {
+  background: var(--bg-sidebar);
+  padding: 30px;
+  border-radius: var(--radius-md); /* Bo góc 12px */
+  border: 1px solid var(--border-color);
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-card);
+}
+
+/* Tiêu đề widget (Tìm kiếm, Chuyên mục) */
+.widget-title {
+  font-family: var(--font-main);
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.widget-title i {
+  color: var(--primary);
+}
+
+/* --- Ô TÌM KIẾM --- */
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  background: var(--bg-input); /* Nền tối */
+  border: 1px solid var(--border-color);
+  padding: 14px 20px;
+  border-radius: 50px; /* Bo tròn kiểu viên thuốc */
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: var(--primary);
+  background: #1a1d2e;
+  box-shadow: 0 0 0 4px rgba(10, 109, 194, 0.15); /* Hiệu ứng tỏa sáng khi bấm vào */
+}
+
+.search-box input::placeholder {
+  color: #666;
+  font-weight: 500;
+}
+
+/* --- DANH SÁCH CHUYÊN MỤC --- */
+.cat-list {
+  margin-top: 10px;
+}
+.cat-list li {
+  margin-bottom: 10px;
+}
+
+.cat-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-gray);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 12px;
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.02); /* Nền mờ nhẹ */
+  border: 1px solid transparent;
+}
+
+/* Hiệu ứng khi di chuột vào danh mục */
+.cat-list a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transform: translateX(5px); /* Trượt nhẹ sang phải */
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Trạng thái đang chọn (Active) */
+.cat-list a.active {
+  background: var(--primary-gradient); /* Màu xanh gradient */
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(10, 109, 194, 0.3);
+  border: none;
+}
+
+/* Thêm mũi tên nhỏ bên phải link danh mục cho xịn */
+.cat-list a::after {
+  content: "\f054"; /* Mã icon mũi tên font awesome */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 12px;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+.cat-list a:hover::after {
+  opacity: 1;
+  transform: translateX(3px);
+}
+.cat-list a.active::after {
+  content: "\f00c"; /* Đổi thành dấu tích khi active */
+  opacity: 1;
+}
+/* =========================================
+   2. HERO SLIDER (BANNER TO)
+   ========================================= */
+#hero-slider {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+  margin-bottom: 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.slider-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+/* Slide Item & Animation */
+.slide-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s;
+  display: flex;
+  align-items: center;
+}
+.slide-item.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slide-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Chia tỉ lệ Chữ - Ảnh */
+  gap: 40px;
+  align-items: center;
+  height: 100%;
+}
+
+/* --- Phần Chữ (Text) --- */
+.slide-text {
+  padding-left: 10px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: 0.8s ease-out;
+  z-index: 2;
+}
+.slide-item.active .slide-text {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-subtitle {
+  display: inline-block;
+  color: #00c6ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  background: rgba(10, 109, 194, 0.15);
+  padding: 6px 15px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(10, 109, 194, 0.3);
+}
+
+.slide-text h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+.slide-text h1 span {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Chữ Gradient */
+}
+
+.slide-text p {
+  color: #cbd5e1;
+  font-size: 16px;
+  margin-bottom: 35px;
+  max-width: 480px;
+}
+
+/* --- Tìm đoạn này trong file CSS của bạn --- */
+.btn-slider {
+  /* Các dòng cũ giữ nguyên */
+  display: inline-flex;
+  align-items: center;
+  background: var(--primary-gradient);
+  color: #fff;
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(10, 109, 194, 0.4);
+  transition: all 0.3s ease;
+
+  /* --- THÊM CÁC DÒNG NÀY VÀO --- */
+  margin-top: auto; /* Đẩy nút xuống vị trí cuối cùng */
+  align-self: flex-start; /* Canh nút sát lề bên trái */
+  margin-bottom: 20px; /* Cách lề dưới một chút cho đẹp */
+  /* ------------------------------ */
+}
+.btn-slider:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(10, 109, 194, 0.6);
+}
+
+/* --- Phần Ảnh (Image) --- */
+.slide-image {
+  position: relative;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.9) translateX(50px);
+  transition: 0.8s 0.2s ease-out;
+}
+.slide-item.active .slide-image {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+.slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg); /* Bo góc ảnh 24px */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Badge (Kính mờ) --- */
+.offer-badge {
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  background: rgba(30, 30, 30, 0.6); /* Kính đen mờ */
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 15px 25px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  animation: floatBadge 3s ease-in-out infinite;
+}
+/* Chấm trang trí trên badge */
+.offer-badge::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  background: #ff5e00;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ff5e00;
+}
+.offer-badge span {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #b0b0b0;
+  margin-bottom: 2px;
+}
+.offer-badge strong {
+  font-size: 18px;
+  font-weight: 800;
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@keyframes floatBadge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* --- Điều hướng Slider --- */
+.slider-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.slider-control:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.slider-control.prev {
+  left: 20px;
+}
+.slider-control.next {
+  right: 20px;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.dot.active {
+  background: var(--primary);
+  width: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--primary);
+}
+
+/* =========================================
+   3. HEADER TRANG BLOG
+   ========================================= */
+.blog-header {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+}
+.blog-header::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+.blog-title {
+  font-size: 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 10px;
+  letter-spacing: 1px;
+}
+.blog-subtitle {
+  color: var(--text-gray);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* =========================================
+   4. LAYOUT & GRID BÀI VIẾT
+   ========================================= */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  align-items: start;
+}
+
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blog-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md); /* Bo góc card 12px */
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  animation: fadeUp 0.5s ease forwards;
+}
+.blog-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--primary);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.blog-img {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+.blog-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.blog-card:hover img {
+  transform: scale(1.1);
+}
+
+.blog-date {
+  position: absolute;
+  top: 15px;
+
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.blog-content {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.blog-category {
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.blog-title-link {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog-title-link:hover {
+  color: var(--primary);
+}
+
+.blog-desc {
+  font-size: 14px;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.btn-read-more {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.btn-read-more:hover {
+  color: var(--primary);
+}
+.btn-read-more:hover i {
+  transform: translateX(5px);
+}
+
+/* Wrapper bên ngoài để chứa nút bấm treo lơ lửng */
+.slider-container-outer {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+
+/* Khung slider chính (Cắt những gì thừa ra ngoài) */
+#hero-slider {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+  border-radius: var(--radius-lg); /* Bo cong cả slider luôn cho đẹp */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: radial-gradient(circle at 50% 0%, #1a253a 0%, #0b0d14 70%);
+}
+
+.slider-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+/* Slide Item & Animation */
+.slide-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s;
+  display: flex;
+  align-items: center;
+}
+.slide-item.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slide-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+  height: 100%;
+}
+
+/* --- Phần Chữ (Text) --- */
+.slide-text {
+  padding-left: 20px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: 0.8s ease-out;
+  z-index: 2;
+
+  /* Flexbox để đẩy nút xuống */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.slide-item.active .slide-text {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-subtitle {
+  display: inline-block;
+  color: #00c6ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  background: rgba(10, 109, 194, 0.15);
+  padding: 6px 15px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(10, 109, 194, 0.3);
+  align-self: flex-start; /* Không bị kéo giãn */
+}
+
+.slide-text h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+.slide-text h1 span {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.slide-text p {
+  color: #cbd5e1;
+  font-size: 16px;
+  margin-bottom: 35px;
+  max-width: 480px;
+}
+
+/* Nút bấm (Button) */
+.btn-slider {
+  display: inline-flex;
+  align-items: center;
+  background: var(--primary-gradient);
+  color: #fff;
+  padding: 14px 35px;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 20px rgba(10, 109, 194, 0.3);
+  transition: all 0.3s ease;
+
+  /* Đẩy nút xuống dưới và căn trái */
+  margin-top: auto;
+  align-self: flex-start;
+  margin-bottom: 40px; /* Cách đáy một chút */
+}
+.btn-slider:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(10, 109, 194, 0.6);
+}
+
+/* --- Phần Ảnh (Image) --- */
+.slide-image {
+  position: relative;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.9) translateX(50px);
+  transition: 0.8s 0.2s ease-out;
+}
+.slide-item.active .slide-image {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+.slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Badge (Kính mờ) --- */
+.offer-badge {
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 15px 25px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  animation: floatBadge 3s ease-in-out infinite;
+}
+.offer-badge::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  background: #ff5e00;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ff5e00;
+}
+.offer-badge span {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #b0b0b0;
+  margin-bottom: 2px;
+}
+.offer-badge strong {
+  font-size: 18px;
+  font-weight: 800;
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@keyframes floatBadge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* --- ĐIỀU HƯỚNG (NÚT TREO 2 BÊN) --- */
+.slider-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px; /* Nút to hơn chút */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100; /* Nổi lên trên cùng */
+}
+.slider-control:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Đẩy nút ra ngoài khung -80px */
+.slider-control.prev {
+  left: -80px;
+}
+.slider-control.next {
+  right: -80px;
+}
+
+/* Dots nằm trong khung */
+.slider-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.dot.active {
+  background: var(--primary);
+  width: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--primary);
+}
+
+/* ==========================================================================
+   FULL RESPONSIVE FIX (Dán đoạn này xuống dưới cùng file CSS)
+   ========================================================================== */
+
+/* --- 1. TABLET & MÀN HÌNH NHỎ (Dưới 1024px) --- */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  /* Chuyển layout sang dạng dọc (Cột đơn) */
+  .blog-layout {
+    display: flex !important; /* Dùng Flex để đổi thứ tự dễ hơn Grid */
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* Sidebar bung full chiều rộng */
+  .sidebar-widget {
+    width: 100%;
+  }
+
+  /* Grid bài viết: Chắc chắn là 1 cột cho dễ nhìn */
+  .blog-list {
+    grid-template-columns: 1fr;
+  }
+}
+/* =================================================================
+   FIX TOÀN BỘ LỖI MOBILE (RỚT FORM, THANH CUỘN, HEADER ĐÈ)
+   (Dán đoạn này xuống dưới cùng file CSS - Thay thế đoạn mobile cũ)
+   ================================================================= */
+
+@media (max-width: 768px) {
+  /* 1. XỬ LÝ HEADER ĐÈ & KHOẢNG CÁCH */
+  .blog-page-wrapper {
+    /* Đẩy nội dung xuống sâu hơn (140px) để né Header Fixed */
+    padding-top: 140px !important;
+    overflow-x: hidden; /* Chặn trượt ngang cả trang */
+  }
+
+  /* 2. RESET LAYOUT (SỬA LỖI RỚT FORM) */
+  .blog-layout {
+    display: flex !important; /* Bắt buộc dùng Flex */
+    flex-direction: column !important; /* Xếp dọc từ trên xuống */
+    margin-top: 0 !important;
+    gap: 20px;
+  }
+
+  /* Ép cột nội dung và cột sidebar bung hết cỡ */
+  .blog-content-area,
+  .blog-sidebar,
+  .sidebar-widget {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important; /* Bỏ chia tỷ lệ flex cũ */
+    margin: 0 !important;
+  }
+
+  /* 3. ĐƯA CHUYÊN MỤC LÊN ĐẦU & LÀM ĐẸP */
+  .blog-sidebar,
+  .sidebar-widget {
+    order: -1; /* Đẩy lên vị trí số 1 */
+    background: transparent !important; /* Bỏ nền xám */
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 0 15px 0 !important; /* Bỏ padding thừa */
+  }
+
+  /* Ẩn tiêu đề "Chuyên mục" nếu muốn gọn */
+  .widget-title {
+    display: none !important;
+  }
+
+  /* 4. THANH DANH MỤC TRƯỢT NGANG (ẨN SCROLLBAR XẤU) */
+  .cat-list {
+    display: flex !important;
+    flex-direction: row !important; /* Xếp ngang */
+    flex-wrap: nowrap !important; /* Không xuống dòng */
+    overflow-x: auto !important; /* Cho phép trượt */
+    gap: 10px;
+    padding-bottom: 5px;
+    width: 100%;
+
+    /* --- CODE ẨN THANH CUỘN (Magic) --- */
+    -ms-overflow-style: none; /* IE và Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Ẩn thanh cuộn trên Chrome, Safari, Opera */
+  .cat-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cat-list li {
+    flex-shrink: 0; /* Không bị co dúm */
+    width: auto !important;
+  }
+
+  /* Style nút danh mục */
+  .cat-list a {
+    display: inline-block;
+    white-space: nowrap; /* Giữ chữ 1 dòng */
+    background: #2a2d45;
+    color: #b0b0b0;
+    padding: 8px 16px;
+    border-radius: 25px; /* Bo tròn đẹp hơn */
+    font-size: 13px;
+    border: 1px solid #353950;
+    text-decoration: none;
+  }
+
+  .cat-list a.active {
+    background: #0a6dc2; /* Màu xanh chủ đạo */
+    color: #fff;
+    border-color: #0a6dc2;
+  }
+
+  /* 5. ẨN SLIDER (Nếu chưa ẩn) */
+  #hero-slider,
+  .slider-container-outer {
+    display: none !important;
+  }
+
+  /* 6. GRID BÀI VIẾT (1 CỘT TO RÕ) */
+  .blog-list {
+    display: grid !important;
+    grid-template-columns: 1fr !important; /* 1 cột duy nhất */
+    gap: 20px;
+  }
+
+  .blog-card {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}

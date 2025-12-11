@@ -1,0 +1,335 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap");
+
+:root {
+  --bg-body: #0f0f0f;
+  --bg-card: #1e1e1e;
+  --primary: #0a6dc2;
+  --text-white: #fff;
+  --text-gray: #bbb;
+  --border: #333;
+  --status-success: #2ecc71; /* Xanh lá (Giao thành công) */
+  --status-pending: #f1c40f; /* Vàng (Đang xử lý) */
+  --font-main: "Outfit", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  background: var(--bg-body);
+  color: var(--text-white);
+  font-family: var(--font-main);
+  margin: 0;
+}
+
+.orders-wrapper {
+  padding: 140px 0 80px;
+  min-height: 100vh;
+  background-image: radial-gradient(
+    circle at top left,
+    #1a1f35 0%,
+    #050505 60%
+  );
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  border-left: 5px solid var(--primary);
+  padding-left: 15px;
+  text-transform: uppercase;
+}
+
+/* --- DANH SÁCH ĐƠN HÀNG --- */
+.order-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: 0.3s;
+}
+.order-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Ảnh SP */
+.od-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+.od-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Thông tin SP */
+.od-info {
+  flex-grow: 1;
+}
+.od-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.od-meta {
+  font-size: 13px;
+  color: var(--text-gray);
+}
+.od-price {
+  color: var(--primary);
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+/* Trạng thái */
+.od-status {
+  min-width: 140px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 600;
+}
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.st-success {
+  background: rgba(46, 204, 113, 0.15);
+  color: var(--status-success);
+  border: 1px solid var(--status-success);
+}
+.st-pending {
+  background: rgba(241, 196, 15, 0.15);
+  color: var(--status-pending);
+  border: 1px solid var(--status-pending);
+}
+
+/* Nút đánh giá */
+.btn-rate {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-left: 20px;
+}
+.btn-rate:hover {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-rate.disabled {
+  border-color: #444;
+  color: #666;
+  cursor: not-allowed;
+  background: transparent;
+}
+.btn-rate.disabled:hover {
+  background: transparent;
+  color: #666;
+}
+
+/* --- MODAL ĐÁNH GIÁ --- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+}
+.modal.show {
+  display: flex;
+  animation: fadeIn 0.3s;
+}
+
+.modal-content {
+  background: #1a1a1a;
+  width: 500px;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #444;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+.modal-header h3 {
+  margin: 0 0 20px;
+  text-align: center;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* Star Rating Input */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+.star-rating input {
+  display: none;
+}
+.star-rating label {
+  font-size: 30px;
+  color: #444;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #eeb422; /* Vàng */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+.form-control {
+  width: 100%;
+  background: #0f0f0f;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  outline: none;
+  font-family: var(--font-main);
+}
+.form-control:focus {
+  border-color: var(--primary);
+}
+
+.btn-submit-review {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.btn-close {
+  margin-top: 10px;
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* =========================================
+       4. RESPONSIVE (MOBILE & TABLET)
+       ========================================= */
+
+/* Tablet (Dưới 992px) */
+@media (max-width: 992px) {
+  .orders-wrapper {
+    padding-top: 150px;
+  }
+}
+
+/* Mobile (Dưới 768px) */
+@media (max-width: 768px) {
+  .orders-wrapper {
+    padding-top: 150px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  /* Chuyển Card sang dạng dọc */
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+    /* Căn trái toàn bộ */
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .od-info {
+    width: 100%;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #333;
+    /* Kẻ ngang phân cách */
+    margin-bottom: 5px;
+  }
+
+  .od-meta {
+    font-size: 13px;
+  }
+
+  .od-price {
+    font-size: 18px;
+    margin-top: 8px;
+  }
+
+  /* Status trên mobile: nằm ngang hàng nhau hoặc xuống dòng tùy độ dài */
+  .od-status {
+    width: 100%;
+    text-align: left;
+    /* Căn trái */
+    min-width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Nhãn và Badge tách đôi */
+  }
+
+  /* Thêm label giả cho status trên mobile để dễ hiểu hơn (Optional) */
+  .od-status::before {
+    content: "Trạng thái:";
+    font-size: 13px;
+    color: #888;
+    font-weight: 400;
+  }
+
+  /* Nút bấm full width trên mobile */
+  .btn-rate {
+    width: 100%;
+    /* Nút to hết cỡ dễ bấm */
+    margin-left: 0 !important;
+    padding: 12px;
+  }
+
+  /* Nếu có 2 nút thì nút thứ 2 cách ra chút */
+  .btn-rate + .btn-rate {
+    margin-top: 0;
+  }
+}

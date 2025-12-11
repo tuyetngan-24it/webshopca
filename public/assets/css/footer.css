@@ -1,0 +1,133 @@
+/* --- CÀI ĐẶT CHUNG --- */
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; /* Giúp chữ mượt hơn trên Mac */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px; /* Giảm padding hông một chút cho chuẩn lưới */
+}
+
+/* --- FOOTER CHÍNH --- */
+.main-footer {
+  background-color: #050505; /* Đen sâu hơn để tách biệt với thân trang */
+  border-top: 1px solid #333;
+  padding-top: 80px; /* Tăng khoảng cách trên cho thoáng */
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px; /* Tăng khoảng cách giữa các cột */
+  padding-bottom: 60px;
+  border-bottom: 1px solid #222;
+}
+
+/* --- TIÊU ĐỀ CỘT --- */
+.footer-heading {
+  font-family: "Montserrat", sans-serif; /* Dùng font tiêu đề cho cứng cáp */
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Giãn chữ ra nhìn sang hơn */
+  position: relative;
+  display: inline-block;
+}
+
+/* Thêm gạch chân nhỏ dưới tiêu đề cho đẹp */
+.footer-heading::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--primary-color);
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+/* --- NỘI DUNG VĂN BẢN --- */
+.info-col p {
+  color: #b0b0b0; /* Màu xám sáng hơn chút cho dễ đọc */
+  line-height: 1.8; /* Giãn dòng dễ đọc */
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+/* --- SOCIAL ICONS --- */
+.social-icons {
+  display: flex;
+  gap: 12px; /* Khoảng cách giữa các icon */
+}
+
+.social-icons a {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05); /* Nền kính mờ hiện đại hơn nền đặc */
+  color: #fff;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-icons a:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Thêm bóng khi hover */
+}
+
+/* --- DANH SÁCH LIÊN KẾT --- */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 15px; /* Tăng khoảng cách giữa các dòng */
+}
+
+.footer-col ul a {
+  color: #b0b0b0;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: block; /* Để padding hoạt động tốt hơn */
+}
+
+.footer-col ul a:hover {
+  color: #fff; /* Hover thành màu trắng sáng */
+  padding-left: 8px; /* Đẩy sang phải nhiều hơn chút */
+  color: var(--primary-color);
+}
+
+/* Biểu tượng trong list (nếu có dùng FontAwesome trong li) */
+.footer-col ul li i {
+  margin-right: 10px;
+  color: var(--primary-color);
+  width: 20px;
+  text-align: center;
+}
+
+/* --- FOOTER BOTTOM --- */
+.footer-bottom {
+  padding: 25px 0;
+  text-align: center;
+  color: #666;
+  font-size: 13px;
+  background-color: #000; /* Nền đen tuyền dưới cùng */
+  margin-top: -1px; /* Fix lỗi hở line nhỏ */
+}

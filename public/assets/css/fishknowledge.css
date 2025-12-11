@@ -1,0 +1,438 @@
+/* ==========================================================================
+   PHẦN 1: CORE RESET - "THUỐC ĐẶC TRỊ" LỖI KHÔNG CUỘN ĐƯỢC
+   (Phá bỏ mọi giới hạn chiều cao từ khung cha/framework cũ)
+   ========================================================================== */
+
+/* 1. Ép toàn bộ các thẻ bao ngoài phải cho phép cuộn */
+html,
+body,
+#app,
+.wrapper,
+.main-content,
+.container-fluid {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important; /* Bắt buộc hiện thanh cuộn dọc */
+  overflow-x: hidden !important; /* Tắt thanh cuộn ngang thừa */
+}
+
+/* 2. Cấu hình container chính của trang Blog */
+.blog-page-wrapper {
+  display: block !important;
+  width: 100%;
+  min-height: 100vh; /* Ít nhất cao bằng màn hình */
+  height: auto !important; /* Tự động giãn nở theo nội dung bên trong */
+
+  /* Màu nền & Font chữ */
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  /* QUAN TRỌNG: Cho phép nội dung tràn ra để hiển thị hết */
+  overflow: visible !important;
+
+  /* Tạo khoảng đệm lớn ở đáy để nội dung không bị sát mép dưới */
+  padding-bottom: 150px !important;
+
+  position: relative;
+  z-index: 1;
+}
+
+/* 3. Tạo một "bệ đỡ" vô hình ở cuối trang để chắc chắn Footer không đè lên */
+.blog-page-wrapper::after {
+  content: "";
+  display: block;
+  height: 50px;
+  width: 100%;
+  clear: both;
+}
+
+/* ==========================================================================
+   PHẦN 2: GIAO DIỆN & BỐ CỤC (LAYOUT)
+   ========================================================================== */
+
+/* --- Container giới hạn chiều rộng --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
+}
+
+/* --- Layout chia cột (Nội dung bên trái - Sidebar bên phải) --- */
+.blog-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start; /* Sidebar không bị kéo dãn dài xuống */
+  margin-top: 40px;
+  position: relative;
+  height: auto !important; /* Ép layout phải giãn theo nội dung */
+}
+
+.blog-content-area {
+  flex: 3; /* Chiếm 75% chiều rộng */
+  width: 100%; /* Đảm bảo nội dung lấp đầy phần flex */
+}
+
+.blog-sidebar {
+  flex: 1; /* Chiếm 25% chiều rộng */
+  background-color: #1a1a1a;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #333;
+
+  /* Hiệu ứng trượt theo khi cuộn */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   PHẦN 3: SLIDER (BANNER ĐẦU TRANG)
+   ========================================================================== */
+.slider-container-outer {
+  position: relative;
+  margin-top: 40px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #111;
+  border: 1px solid #333;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.slide-item {
+  display: none;
+  padding: 60px 0;
+}
+.slide-item.active {
+  display: block;
+  animation: fadeEffect 0.6s;
+}
+@keyframes fadeEffect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.slide-grid {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: space-between;
+}
+.slide-text {
+  flex: 1;
+  padding-left: 40px;
+}
+.slide-image {
+  flex: 1;
+  text-align: center;
+}
+.slide-image img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Typography Slider */
+.slide-subtitle {
+  color: #f1c40f;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.slide-text h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 15px 0;
+}
+.slide-text h1 span {
+  color: #104e91;
+}
+.slide-text p {
+  color: #bbb;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* Nút điều hướng Slider */
+.slider-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slider-control:hover {
+  background: #104e91;
+}
+.prev {
+  left: 20px;
+}
+.next {
+  right: 20px;
+}
+
+/* ==========================================================================
+   PHẦN 4: DANH SÁCH BÀI VIẾT (GRID SYSTEM)
+   ========================================================================== */
+.blog-list {
+  display: grid;
+  /* Tự động chia cột: Tối thiểu 300px, tối đa giãn hết cỡ */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+.blog-card {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  height: 100%; /* Giúp các card cao bằng nhau */
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(16, 78, 145, 0.2);
+  border-color: #104e91;
+}
+
+/* Ảnh bài viết */
+.blog-img {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background-color: #222;
+}
+.blog-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.blog-card:hover .blog-img img {
+  transform: scale(1.1);
+}
+
+.blog-date {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #f1c40f;
+  color: #000;
+  padding: 4px 10px;
+  font-weight: 800;
+  font-size: 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Nội dung bài viết */
+.blog-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Đẩy footer card xuống đáy */
+}
+
+.blog-category {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #104e91;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.blog-title-link {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: 0.3s;
+}
+.blog-title-link:hover {
+  color: #f1c40f;
+}
+
+.blog-desc {
+  font-size: 14px;
+  color: #bbbbbb;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1; /* Đẩy nút đọc tiếp xuống dưới cùng */
+}
+
+.btn-read-more {
+  color: #f1c40f;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  transition: 0.3s;
+}
+.btn-read-more:hover {
+  gap: 12px;
+  color: #fff;
+}
+
+/* ==========================================================================
+   PHẦN 5: SIDEBAR & WIDGETS
+   ========================================================================== */
+.widget-title {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #104e91;
+}
+
+.cat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cat-list li {
+  margin-bottom: 8px;
+}
+
+.cat-filter {
+  display: block;
+  padding: 10px 15px;
+  color: #bbb;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.cat-filter:hover,
+.cat-filter.active {
+  background: #104e91;
+  color: #fff;
+  transform: translateX(5px);
+}
+
+/* ==========================================================================
+   PHẦN 7: TINH CHỈNH CHO ĐIỆN THOẠI (MOBILE & SMALL SCREENS)
+   (Dán đoạn này xuống dưới cùng file CSS)
+   ========================================================================== */
+
+/* --- 1. Mobile Tablet & Điện thoại to (Dưới 768px) --- */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  /* Slider: Giảm padding và cỡ chữ */
+  .slide-item {
+    padding: 30px 0;
+  }
+
+  .slide-text h1 {
+    font-size: 28px; /* Giảm từ 48px xuống 28px cho đỡ choán màn hình */
+    margin: 10px 0;
+  }
+
+  .slide-text p {
+    font-size: 15px;
+  }
+
+  .slide-image img {
+    max-width: 80%; /* Thu nhỏ ảnh slider lại chút */
+  }
+
+  /* Grid bài viết: Ép về 1 cột duy nhất */
+  .blog-list {
+    grid-template-columns: 1fr; /* Bỏ minmax(300px), ép 1 cột full màn hình */
+    gap: 20px;
+  }
+
+  .blog-card {
+    /* Tăng vùng bấm cho thẻ bài viết trên mobile */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .blog-img {
+    height: 180px; /* Giảm chiều cao ảnh đại diện bài viết */
+  }
+
+  .blog-content {
+    padding: 20px; /* Giảm padding trong thẻ */
+  }
+
+  .blog-title-link {
+    font-size: 18px; /* Tiêu đề bài viết nhỏ lại */
+  }
+}
+
+/* --- 2. Điện thoại nhỏ (iPhone 5/SE/Mini - Dưới 480px) --- */
+@media (max-width: 480px) {
+  /* Slider: Ẩn luôn ảnh slider để tập trung vào text (nếu muốn gọn) 
+     hoặc chỉ thu nhỏ padding */
+  .slide-grid {
+    gap: 20px;
+  }
+
+  .slide-text h1 {
+    font-size: 24px; /* Nhỏ hơn nữa */
+    line-height: 1.3;
+  }
+
+  .slider-control {
+    width: 30px;
+    height: 30px;
+    font-size: 12px; /* Nút next/prev nhỏ lại */
+  }
+
+  /* Sidebar: Đẩy xuống dưới cùng và giảm padding */
+  .blog-sidebar {
+    padding: 15px;
+    margin-top: 30px;
+  }
+
+  .widget-title {
+    font-size: 16px;
+  }
+
+  /* Chỉnh lại nút "Đọc tiếp" */
+  .btn-read-more {
+    font-size: 11px;
+    padding: 8px 0; /* Tăng vùng bấm dọc */
+  }
+}
