@@ -1,47 +1,6 @@
 # website bán cá
 
 
-## 📖 Mục Lục
-
-* [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
-* [Cài đặt](#-cài-đặt)
-* [Cấu hình](#-cấu-hình)
-* [Hướng dẫn sử dụng](#-hướng-dẫn-sử-dụng)
-* [Lưu ý kỹ thuật (Cách chèn file Public)](#-lưu-ý-kỹ-thuật)
-
-## 🛠️ Công nghệ sử dụng
-
-* **Ngôn ngữ:** PHP (mô hình MVC tự xây dựng)
-* **Cơ sở dữ liệu:** MySQL (Quản lý qua phpMyAdmin)
-* **Web Server:** Apache (Khuyên dùng XAMPP hoặc WAMP)
-* **Giao diện (Frontend):** HTML, CSS, JavaScript [Ghi thêm nếu dùng Bootstrap, jQuery...]
-
----
-
-## 🚀 Cài Đặt
-
-Thực hiện các bước sau để chạy dự án trên máy cục bộ của bạn (localhost).
-
-1.  **Clone Repository** (Nếu dùng Git):
-    ```bash
-    git clone [link-git-repository-cua-ban]
-    ```
-    (Nếu không dùng Git, chỉ cần **giải nén** file `.zip` hoặc `.rar` của dự án).
-
-2.  **Di chuyển thư mục:**
-    Copy thư mục dự án (ví dụ: `DACS2`) vào thư mục `htdocs` của XAMPP:
-    `C:\xampp\htdocs\`
-
-3.  **Cơ sở dữ liệu (Database):**
-    * Mở XAMPP và khởi động Apache & MySQL.
-    * Truy cập `http://localhost/phpmyadmin`.
-    * Tạo một cơ sở dữ liệu mới (ví dụ: `db_dacs2`).
-    * Chọn CSDL vừa tạo, nhấn vào tab **Import** (Nhập).
-    * Chọn file `.sql` đi kèm trong dự án (ví dụ: `database/database.sql`) và nhấn **Go** (Thực hiện).
-
-4.  **Chạy dự án:**
-    Mở trình duyệt và truy cập: `http://localhost/[tên-thư-mục-dự-án]`
-    *Ví dụ:* `http://localhost/DACS2`
 
 ---
 
