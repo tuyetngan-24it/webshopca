@@ -163,10 +163,26 @@ class ProductModel extends Model
     {
         $sql  = "SELECT * FROM `products` WHERE name LIKE '%$name%' limit $limit";
         $result = $this->query($sql);
-        $data = [];
-        while ($row = $result->fetch_assoc()) {
-            $data[] = $row;
+         if ($result && $result->num_rows > 0) {
+            while ($rows = $result->fetch_assoc()) {
+                // 1. Tính toán Slug trước
+                $slugName = toSlug($rows['name']);
+                $fullSlug = $slugName . '-' . $rows['id'];
+
+                // 2. Nhét Slug (và đường dẫn) vào trong dòng dữ liệu ($rows)
+                $rows['slug'] = $fullSlug;
+                // Nên thêm cái này để tiện dùng trong JS
+                $rows['url'] = "" . $fullSlug . ".html";
+
+                // 3. Cuối cùng mới đẩy dòng dữ liệu hoàn chỉnh vào mảng tổng
+                $data[] = $rows;
+            }
         }
+        
+        // $data = [];
+        // while ($row = $result->fetch_assoc()) {
+        //     $data[] = $row;
+        // }
 
         return  json_encode($data);
     }

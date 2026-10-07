@@ -108,6 +108,7 @@
         type: "GET",
         dataType: "json",
         success: function (response) {
+          // console.log(response)
           setTimeout(function () {
             $grid.empty();
 
@@ -160,6 +161,7 @@
           $grid.html('<p style="color:white; text-align:center;">Lỗi tải dữ liệu!</p>');
         },
       });
+      window.renderPagination(1, 1, 'cá'); 
     }
 
     window.loadProductwithKeyword = loadProductwithKeyword;

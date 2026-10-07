@@ -16,9 +16,10 @@ class OrderDetailModel extends Model
 
         // 2. Viết câu SQL JOIN với bảng products
         // Giả sử: bảng orderdetails có cột 'productId' nối với bảng products cột 'id'
-        $sql = "SELECT orderdetails.*, products.name, products.img 
+        $sql = "SELECT orderdetails.*, reviews.rating , products.name, products.img 
                 FROM orderdetails 
                 JOIN products ON orderdetails.productId = products.id 
+                LEFT JOIN reviews ON orderdetails.orderId = reviews.orderid AND orderdetails.productId = reviews.product_id
                 WHERE orderdetails.orderId = $orderId";
 
         // 3. Thực thi

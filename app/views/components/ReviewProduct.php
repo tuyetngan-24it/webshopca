@@ -20,7 +20,8 @@
     .order-detail-wrapper {
         background-color: var(--bg-body);
         color: #f3f4f6;
-        padding-top: 100px; /* Khoảng cách header */
+        padding-top: 100px;
+        /* Khoảng cách header */
         padding-bottom: 40px;
         min-height: calc(100vh - 200px);
     }
@@ -50,7 +51,8 @@
         width: 100%;
         margin-bottom: 1rem;
         overflow-y: hidden;
-        overflow-x: auto; /* Cho phép trượt ngang trên mobile */
+        overflow-x: auto;
+        /* Cho phép trượt ngang trên mobile */
         -ms-overflow-style: -ms-autohiding-scrollbar;
     }
 
@@ -58,7 +60,8 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 10px;
-        min-width: 600px; /* Đặt chiều rộng tối thiểu để kích hoạt thanh trượt */
+        min-width: 600px;
+        /* Đặt chiều rộng tối thiểu để kích hoạt thanh trượt */
     }
 
     .custom-table th {
@@ -67,7 +70,8 @@
         background-color: #111827;
         color: #9ca3af;
         border-bottom: 2px solid var(--border);
-        white-space: nowrap; /* Giữ tiêu đề trên 1 dòng */
+        white-space: nowrap;
+        /* Giữ tiêu đề trên 1 dòng */
     }
 
     .custom-table td {
@@ -95,7 +99,8 @@
         font-weight: 600;
         cursor: pointer;
         transition: 0.3s;
-        white-space: nowrap; /* Không xuống dòng chữ trong nút */
+        white-space: nowrap;
+        /* Không xuống dòng chữ trong nút */
         display: inline-block;
         text-decoration: none;
         font-size: 0.9rem;
@@ -115,8 +120,15 @@
         padding-bottom: 8px;
     }
 
-    .info-label { color: #9ca3af; font-weight: 500; }
-    .info-value { color: #fff; font-weight: 600; }
+    .info-label {
+        color: #9ca3af;
+        font-weight: 500;
+    }
+
+    .info-value {
+        color: #fff;
+        font-weight: 600;
+    }
 
     /* --- BADGES --- */
     .badge-status {
@@ -125,15 +137,26 @@
         font-size: 0.85rem;
         font-weight: bold;
     }
-    .status-success { background-color: #065f46; color: #34d399; border: 1px solid var(--status-success); }
-    .status-pending { background-color: #374151; color: #d1d5db; border: 1px solid #6b7280; }
+
+    .status-success {
+        background-color: #065f46;
+        color: #34d399;
+        border: 1px solid var(--status-success);
+    }
+
+    .status-pending {
+        background-color: #374151;
+        color: #d1d5db;
+        border: 1px solid #6b7280;
+    }
 
     /* =========================================
        RESPONSIVE CSS (MOBILE & TABLET)
        ========================================= */
     @media (max-width: 991px) {
         .order-detail-wrapper {
-            padding-top: 150px; /* Giảm khoảng cách top trên mobile */
+            padding-top: 150px;
+            /* Giảm khoảng cách top trên mobile */
             padding-left: 10px;
             padding-right: 10px;
         }
@@ -146,25 +169,29 @@
         }
 
         .dark-card {
-            padding: 15px; /* Giảm padding card */
+            padding: 15px;
+            /* Giảm padding card */
         }
 
         /* Tinh chỉnh bảng trên mobile */
-        .custom-table th, .custom-table td {
+        .custom-table th,
+        .custom-table td {
             padding: 10px 8px;
-            font-size: 0.9rem; /* Giảm cỡ chữ chút */
+            font-size: 0.9rem;
+            /* Giảm cỡ chữ chút */
         }
 
         /* Cột Tên sản phẩm (cột thứ 2): Cho phép xuống dòng và set độ rộng tối thiểu */
         .custom-table td:nth-child(2) {
-            min-width: 160px; 
-            white-space: normal; /* Cho phép tên dài xuống dòng */
+            min-width: 160px;
+            white-space: normal;
+            /* Cho phép tên dài xuống dòng */
             line-height: 1.4;
         }
 
         /* Các cột số liệu: Giữ trên 1 dòng */
-        .custom-table td:nth-child(3), 
-        .custom-table td:nth-child(4), 
+        .custom-table td:nth-child(3),
+        .custom-table td:nth-child(4),
         .custom-table td:nth-child(5) {
             white-space: nowrap;
         }
@@ -173,10 +200,41 @@
             width: 50px;
             height: 50px;
         }
-        
+
         .section-title {
             font-size: 1.1rem;
         }
+    }
+
+
+    /* Màu xanh lá cây cho trạng thái đã đánh giá */
+    .btn-evaluated {
+        background-color: #28a745;
+        /* Màu xanh lá cây chuẩn của Bootstrap success */
+        color: white;
+        /* Chữ màu trắng */
+        border: 1px solid #28a745;
+        cursor: default;
+        /* Đổi con trỏ chuột */
+        opacity: 0.8;
+        /* Giảm độ mờ */
+        pointer-events: none;
+        /* Ngăn chặn sự kiện click */
+    }
+
+    /* Tùy chỉnh thêm để trông giống button Bootstrap nếu cần */
+    .btn-rate {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        user-select: none;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        /* Quan trọng để bỏ gạch chân của thẻ <a> */
     }
 </style>
 
@@ -252,23 +310,32 @@
                                     foreach ($orderItems as $item):
                                         $subtotal = $item['price'] * $item['productQuantity'];
                                         $totalMoney += $subtotal;
-                                ?>
+                                        ?>
                                         <tr>
                                             <td>
-                                                <img src="<?php echo !empty($item['image']) ? '/dacs2/public/images/' . $item['image'] : 'https://placehold.co/60x60/1f2937/FFF?text=SP'; ?>" alt="SP">
+                                                 <img src="<?php echo $item['img']?>">
                                             </td>
                                             <td>
                                                 <div style="font-weight: bold;"><?php echo $item['productName']; ?></div>
                                             </td>
                                             <td class="text-center">x<?php echo $item['productQuantity']; ?></td>
-                                            <td class="text-end"><?php echo number_format($item['price'], 0, ',', '.'); ?> đ</td>
+                                            <td class="text-end"><?php echo number_format($item['price'], 0, ',', '.'); ?> đ
+                                            </td>
                                             <td class="text-end" style="color: #60a5fa; font-weight: bold;">
                                                 <?php echo number_format($subtotal, 0, ',', '.'); ?> đ
                                             </td>
                                             <td>
-                                                <a href="<?php echo ROOTLINK ?>/review/add/<?php echo $item['orderId']?>/<?php echo $item['productId'] ?>" class="btn-rate" onclick="openRateModal('<?php echo $orderCode ?>')">
-                                                    <i class="fa-regular fa-star"></i> Đánh giá
-                                                </a>
+                                                <?php if ($item['rating'] == null): ?>
+                                                    <a href="<?php echo ROOTLINK ?>/review/add/<?php echo $item['orderId'] ?>/<?php echo $item['productId'] ?>"
+                                                        class="btn-rate" onclick="openRateModal('<?php echo $orderCode ?>')">
+                                                        <i class="fa-regular fa-star"></i> Đánh giá
+                                                    </a>
+                                                <?php else: ?>
+                                                    <a href="<?php echo ROOTLINK ?>/review/add/<?php echo $item['orderId'] ?>/<?php echo $item['productId'] ?>"
+                                                        class="btn-rate btn-evaluated" onclick="return false;"> <i
+                                                            class="fa-solid fa-check"></i> Đã đánh giá
+                                                    </a>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach;
@@ -280,8 +347,10 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="5" class="text-end" style="padding-top: 20px; font-size: 1.1rem;">Tổng tiền hàng:</td>
-                                    <td class="text-end" style="padding-top: 20px; font-size: 1.2rem; color: #34d399; font-weight: bold;">
+                                    <td colspan="5" class="text-end" style="padding-top: 20px; font-size: 1.1rem;">Tổng
+                                        tiền hàng:</td>
+                                    <td class="text-end"
+                                        style="padding-top: 20px; font-size: 1.2rem; color: #34d399; font-weight: bold;">
                                         <?php echo number_format($totalMoney, 0, ',', '.'); ?> vnđ
                                     </td>
                                 </tr>
@@ -314,7 +383,7 @@
         rateModal.classList.remove('show');
     }
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == rateModal) closeRateModal();
     }
 </script>

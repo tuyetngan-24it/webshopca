@@ -16,7 +16,7 @@ class AdminController extends Controller
     $freshUser = $this->userModel->checkRole($userId);
     $_SESSION['user']['role'] = $freshUser;
     if ($_SESSION['user']['role'] != 'admin') {
-      echo "Bạn không có quyền truy cập vào hệ thống quản lý";
+      $this->render('/components/status/notpermission');
       exit();
     }
   }

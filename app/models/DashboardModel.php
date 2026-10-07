@@ -6,7 +6,7 @@ class DashboardModel extends Model
     /**
      * 1. Lấy doanh thu từng tháng (Biểu đồ)
      */
-    public function getMonthlyRevenue($year)
+    public function getMonthlyRevenue($year)   // hàm getMonthlyRevenue: trả về doanh thu theo Tháng
     {
         // Kiểm tra trạng thái 'delivered' (Giao thành công)
         $sql = "SELECT MONTH(created_at) as month, SUM(total) as revenue 
@@ -35,11 +35,11 @@ class DashboardModel extends Model
     {
         $sql = "SELECT SUM(total) as total 
                 FROM orders 
-                WHERE deliveryStatus = 'delivered' 
-                AND YEAR(created_at) = '$year'";
+                WHERE deliveryStatus = 'delivered'   -- NGHĨA CỦA DÒNG NÀY: VỚI ĐIỀU KIỆN TRẠNG THÁI GIAO HÀNG LÀ ĐÃ GIAO --
+                AND YEAR(created_at) = '$year'"; // nghĩa: và năm tạo là năm hiện tại
         
-        $result = $this->db->query($sql);
-        $row = $result->fetch_assoc();
+        $result = $this->db->query($sql);  // truy vấn trả về kết quả
+        $row = $result->fetch_assoc(); 
         return $row['total'] ?? 0;
     }
 
@@ -49,9 +49,9 @@ class DashboardModel extends Model
      */
     public function getTotalProductsSold($year)
     {
-        $sql = "SELECT SUM(od.productQuantity) as total_qty
+        $sql = "SELECT SUM(od.productQuantity) as total_qty 
                 FROM orderdetails od
-                JOIN orders o ON od.orderId = o.id
+                JOIN orders o ON od.orderId = o.id     -- Join dùng để nối 2 bảng với nhau --
                 WHERE o.deliveryStatus = 'delivered' 
                 AND YEAR(o.created_at) = '$year'";
 
@@ -68,12 +68,12 @@ class DashboardModel extends Model
     {
         $sql = "SELECT od.productName as name, SUM(od.productQuantity) as total_sold
                 FROM orderdetails od
-                JOIN orders o ON od.orderId = o.id
+                JOIN orders o ON od.orderId = o.id   
                 WHERE o.deliveryStatus = 'delivered' 
-                AND YEAR(o.created_at) = '$year'
-                GROUP BY od.productId, od.productName
-                ORDER BY total_sold DESC
-                LIMIT 1";
+                AND YEAR(o.created_at) = '$year'   
+                GROUP BY od.productId, od.productName   -- nhóm theo 1 điều kiên --
+                ORDER BY total_sold DESC  -- sắp xếp theo 1 điều kiện ( desc: cao nhất) -- 
+                LIMIT 1"; // giới hạn 1 bảng ghi
 
         $result = $this->db->query($sql);
         if ($result && $result->num_rows > 0) {

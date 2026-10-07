@@ -110,14 +110,14 @@
                 <div class="team-card" data-aos="flip-left">
                     <div class="card-inner">
                         <div class="card-front">
-                            <img src="http://localhost/uploads/vfuc.jpg" alt="Phúc">
+                            <img src="http://localhost/uploads/thanhvien.jpg" alt="TV1">
                             <div class="info">
-                                <h3>Nguyễn Văn Phúc</h3>
+                                <h3>Thành viên 1</h3>
                                 <span>Founder & Art Director</span>
                             </div>
                         </div>
                         <div class="card-back">
-                            <h3>Nguyễn Văn Phúc</h3>
+                            <h3>Thành viên 1</h3>
                             <p class="quote">"Một bể cá đẹp là bể cá có hồn. Tôi thổi hồn vào đá và lũa để kể câu chuyện của riêng bạn."</p>
                             <div class="socials">
                                 <a href="#"><i class="fa-brands fa-facebook"></i></a>
@@ -130,14 +130,14 @@
                 <div class="team-card" data-aos="flip-right">
                     <div class="card-inner">
                         <div class="card-front">
-                            <img src="http://localhost/uploads/manh.jpg" alt="Mạnh">
+                            <img src="http://localhost/uploads/thanhvien.jpg~" alt="TV2">
                             <div class="info">
-                                <h3>Hồ Đức Mạnh</h3>
+                                <h3>Thành viên 2</h3>
                                 <span>Co-Founder & Tech Lead</span>
                             </div>
                         </div>
                         <div class="card-back">
-                            <h3>Hồ Đức Mạnh</h3>
+                            <h3>Thành viên 2</h3>
                             <p class="quote">"Kỹ thuật là nền tảng của nghệ thuật. Tôi đảm bảo hệ sinh thái của bạn luôn vận hành ổn định nhất."</p>
                             <div class="socials">
                                 <a href="#"><i class="fa-brands fa-facebook"></i></a>

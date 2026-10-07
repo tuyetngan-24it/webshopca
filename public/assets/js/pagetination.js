@@ -36,7 +36,7 @@ function renderPagination(startPage, currentPage, $keyword = "") {
   }
 
   if ($keyword != "") {
-    $(".pagination").html("Chỉ lọc tối đa 40 sản phẩm thôi nhé");
+    $(".pagination").html("Chỉ lọc tối đa 12 sản phẩm thôi nhé");
   } else {
     $(".pagination").html(
       `

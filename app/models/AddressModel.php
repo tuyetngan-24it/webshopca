@@ -24,7 +24,7 @@ class AddressModel extends Model
         public function Addward($wardName)
     {
         $this->table = 'wards';
-        $wardId  = 0;
+        $wardId  = 0;  //  khu vực id mặc định là 0
         $sql = "SELECT * FROM wards WHERE name = '$wardName'";
         $result = $this->query($sql);
         if ($result->num_rows != 0) {

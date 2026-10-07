@@ -4,5 +4,5 @@ $config['database'] = [
     'username' => 'root',
     'password' => null,
     'database' => 'shopcathuysinh',
-    'port'=>3308
+    'port'=>3306
 ]; 
