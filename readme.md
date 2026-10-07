@@ -1,6 +1,5 @@
-# Tên Đồ Án Của Bạn (ví dụ: Website Bán Hàng DACS2)
+# website bán cá
 
-[Viết một đoạn ngắn mô tả về dự án của bạn: Đây là dự án gì? Mục tiêu là gì? Đây là đồ án môn học nào? v.v.]
 
 ## 📖 Mục Lục
 
